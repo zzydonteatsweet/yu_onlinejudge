@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type Post = {
     content?: string;
     createTime?: string;
@@ -15,3 +14,4 @@ export type Post = {
     updateTime?: string;
     userId?: number;
 };
+

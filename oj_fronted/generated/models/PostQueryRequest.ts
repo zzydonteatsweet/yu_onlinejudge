@@ -2,7 +2,6 @@
 /* istanbul ignore file */
 /* tslint:disable */
 /* eslint-disable */
-
 export type PostQueryRequest = {
     content?: string;
     current?: number;
@@ -18,3 +17,4 @@ export type PostQueryRequest = {
     title?: string;
     userId?: number;
 };
+
