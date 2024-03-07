@@ -8,7 +8,9 @@
         <router-view />
       </a-layout-content>
       <a-layout-footer class="footer">
-          测试这里
+        <a href="https://yupi.icu" target="_blank">
+          编程导航知识星球 by 程序员鱼皮
+        </a>
       </a-layout-footer>
     </a-layout>
   </div>
@@ -24,7 +26,7 @@
 }
 
 #basicLayout .content {
-  background: linear-gradient(to right, #bbb, #fff);
+  background: linear-gradient(to right, #fefefe, #fff);
   margin-bottom: 16px;
   padding: 20px;
 }

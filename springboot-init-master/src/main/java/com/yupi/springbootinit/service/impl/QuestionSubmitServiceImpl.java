@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yupi.springbootinit.common.ErrorCode;
 import com.yupi.springbootinit.constant.CommonConstant;
 import com.yupi.springbootinit.exception.BusinessException;
+import com.yupi.springbootinit.judge.JudgeService;
 import com.yupi.springbootinit.mapper.QuestionSubmitMapper;
 import com.yupi.springbootinit.model.dto.questionsubmit.QuestionSubmitAddRequest;
 import com.yupi.springbootinit.model.dto.questionsubmit.QuestionSubmitQueryRequest;
@@ -22,10 +23,13 @@ import com.yupi.springbootinit.utils.SqlUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.stream.Collectors;
 
 /**
@@ -50,8 +54,12 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
      * @param loginUser
      * @return
      */
+    @Resource
+    @Lazy
+    private JudgeService judgeService;
     @Override
     public long doQuestionSubmit(QuestionSubmitAddRequest questionSubmitAddRequest, User loginUser) {
+        System.out.println("Service get");
         // 校验编程语言是否合法
         String language = questionSubmitAddRequest.getLanguage();
         QuestionSubmitLanguageEnum languageEnum = QuestionSubmitLanguageEnum.getEnumByValue(language);
@@ -79,6 +87,21 @@ public class QuestionSubmitServiceImpl extends ServiceImpl<QuestionSubmitMapper,
         if (!save){
             throw new BusinessException(ErrorCode.SYSTEM_ERROR, "数据插入失败");
         }
+        long questionsSubmitId = questionSubmit.getId();
+        CompletableFuture.runAsync(() -> {
+            judgeService.doJudge(questionsSubmitId);
+        });
+//        CompletableFuture<Void> future = CompletableFuture.runAsync(() -> {
+//             judgeService.doJudge(questionsSubmitId);
+//        });
+//        try {
+//            future.get();
+//        } catch (InterruptedException e) {
+//            throw new RuntimeException(e);
+//        } catch (ExecutionException e) {
+//            throw new RuntimeException(e);
+//        }
+        System.out.println("service saved");
         return questionSubmit.getId();
     }
 

@@ -58,6 +58,7 @@ public class QuestionSubmitController {
         // 登录才能点赞
         final User loginUser = userService.getLoginUser(request);
         long questionSubmitId = questionSubmitService.doQuestionSubmit(questionSubmitAddRequest, loginUser);
+        System.out.println("Controller get");
         return ResultUtils.success(questionSubmitId);
     }
 

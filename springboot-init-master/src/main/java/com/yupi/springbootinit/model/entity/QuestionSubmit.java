@@ -13,7 +13,7 @@ import lombok.Data;
 @TableName(value ="question_submit")
 @Data
 public class QuestionSubmit implements Serializable {
-    /**
+        /**
      * id
      */
     @TableId(type = IdType.ASSIGN_ID)
@@ -67,4 +67,5 @@ public class QuestionSubmit implements Serializable {
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
+
 }

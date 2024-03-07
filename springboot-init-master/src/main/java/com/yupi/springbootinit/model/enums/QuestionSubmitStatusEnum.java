@@ -1,6 +1,7 @@
 package com.yupi.springbootinit.model.enums;
 
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;

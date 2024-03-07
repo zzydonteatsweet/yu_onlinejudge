@@ -13,7 +13,7 @@
         >
           <div class="title-bar">
             <img class="logo" src="../assets/oj-logo.svg" />
-            <div class="title">OJ</div>
+            <div class="title">鱼 OJ</div>
           </div>
         </a-menu-item>
         <a-menu-item v-for="item in visibleRoutes" :key="item.path">
@@ -31,7 +31,7 @@
 
 <script setup lang="ts">
 import { routes } from "../router/routes";
-import { useRoute, useRouter } from "vue-router";
+import {useRouter } from "vue-router";
 import { computed, ref } from "vue";
 import { useStore } from "vuex";
 import checkAccess from "@/access/checkAccess";
@@ -68,7 +68,7 @@ console.log();
 
 setTimeout(() => {
   store.dispatch("user/getLoginUser", {
-    userName: "ojtest_1",
+    userName: "鱼皮管理员",
     userRole: ACCESS_ENUM.ADMIN,
   });
 }, 3000);
